@@ -1,0 +1,58 @@
+1. API Endpoints
+- Create a new task.
+    > Method: POST
+    > Endpoint: /tasks
+    > Payload Request: {"taskName":"Test taskName1"}
+    > Payload Response: {"taskId":"cc066d24-b1c5-4c63-9955-746dca0c7e08","taskName":"Test task2","taskStatus":false}
+- Mark a task as completed.
+    > Method: PUT
+    > Endpoint: /tasks/completed/{id}
+    > Payload Request: taskId as path variable
+    > Payload Response: {"taskId":"4badade4-8c65-44be-9d03-b0cb696e70ae","taskName":"Test task1","taskStatus":true}
+- Retrieve a list of tasks.
+    > Method: GET
+    > Endpoint: /tasks
+    > Payload Request: none
+    > Payload Response: [{"taskId":"cc066d24-b1c5-4c63-9955-746dca0c7e08","taskName":"Test task2","taskStatus":false},{"taskId":"4badade4-8c65-44be-9d03-b0cb696e70ae","taskName":"Test task1","taskStatus":true}]
+
+2. Authentication
+For the authentication on Spring Boot, I would like to use the Spring Security which is the common library. But for the best practices
+JWT will be my choice. I haven't implementing the JWT on any Java project but in my last project with Laravel during college.
+
+3. Database Design
+Since from my code it's only use one entity so the table should be simple
+
+Table name: Task
+Column:
+- TASK_ID
+    > Primary Key
+    > Type UUID/GUID
+- TASK_NAME
+    > Type Varchar
+- TASK_STATUS
+    > Type Boolean
+
+
+4. SQL Queries
+select * from task where task_status = false;
+
+5. Problem-Solving
+private int sumAllOfEventNumber(List<Integer> list) {
+    int result = 0;
+    for(Integer i : list) {
+        if(i % 2 == 0) result += i;
+    }
+    return result;
+}
+
+6. Error-Handling
+For example method save() is throwing Exception.
+To perform this we will use try catch to check what's the error and inform outsider or displaying in logs
+private void check() {
+    try {
+        save();
+    } catch(IOException e) {
+        logs.error("Error when saving data, cause: {}", e.getMessage());
+        // perform rollback if necessary
+    }
+}
